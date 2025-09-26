@@ -33,6 +33,14 @@
             android:name=".activities.MainActivity"
             android:exported="false" />
 
+        <!-- Nuevas activities de Rutinas -->
+        <activity
+            android:name=".activities.ExerciseDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ExerciseExecutionActivity"
+            android:exported="false" />
+
         <service
             android:name=".services.MusicService"
             android:enabled="true"

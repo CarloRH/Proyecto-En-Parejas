@@ -15,9 +15,18 @@ import java.util.List;
 
 public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder> {
     private final List<Exercise> exerciseList;
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(Exercise exercise);
+    }
 
     public ExerciseAdapter(List<Exercise> exerciseList) {
         this.exerciseList = exerciseList;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -33,6 +42,9 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
         Exercise exercise = exerciseList.get(position);
         holder.nameTextView.setText(exercise.getName());
         holder.descriptionTextView.setText(exercise.getDescription());
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) listener.onItemClick(exercise);
+        });
     }
 
     @Override

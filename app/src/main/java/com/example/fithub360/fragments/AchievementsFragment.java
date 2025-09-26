@@ -57,7 +57,7 @@ public class AchievementsFragment extends Fragment {
 
     private void initializeAchievements() {
         achievements = new ArrayList<>();
-        String[] categories = {"Pecho", "Espalda", "Piernas", "Brazos", "Abdominales"};
+        String[] categories = {"Pecho", "Espalda", "Piernas", "Hombros", "Bíceps", "Tríceps", "Abdominales", "Antebrazos"};
 
         for (String category : categories) {
             achievements.add(new Achievement(
