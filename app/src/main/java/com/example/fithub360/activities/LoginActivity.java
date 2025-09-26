@@ -27,12 +27,8 @@ public class LoginActivity extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(this);
         sessionManager = new SessionManager(this);
 
-        // Si ya hay sesión activa, ir directamente a MainActivity
-        if (sessionManager.isLoggedIn()) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-            return;
-        }
+        // Forzar que cada arranque requiera autenticación: limpiar cualquier sesión previa
+        sessionManager.logout();
 
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
@@ -53,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (databaseHelper.checkUser(username, password)) {
+            // Marcar sesión activa para la ejecución actual
             sessionManager.setLogin(true, username);
             startActivity(new Intent(this, MainActivity.class));
             finish();
