@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FitHub360</string>
+
+    <!-- Login y Registro -->
+    <string name="login">Iniciar Sesión</string>
+    <string name="register">Registrarse</string>
+    <string name="username">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="password_hint">Mínimo 6 caracteres</string>
+    <string name="error_empty_fields">Por favor completa todos los campos</string>
+    <string name="error_invalid_password">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="error_login_failed">Usuario o contraseña incorrectos</string>
+    <string name="registration_success">Registro exitoso</string>
+    <string name="username_exists">El nombre de usuario ya existe</string>
+
+    <!-- Navegación -->
+    <string name="nav_routine">Rutina</string>
+    <string name="nav_coach">Coach IA</string>
+    <string name="nav_nutrition">Nutrición</string>
+    <string name="nav_music">Música</string>
+    <string name="nav_achievements">Logros</string>
+
+    <!-- Ejercicios -->
+    <string name="start_exercise">Iniciar</string>
+    <string name="exercise_complete">¡Ejercicio completado!</string>
+    <string name="exercise_in_progress">Tiempo restante: %d segundos</string>
+
+    <!-- Música -->
+    <string name="play">Reproducir</string>
+    <string name="pause">Pausar</string>
+    <string name="next">Siguiente</string>
+    <string name="previous">Anterior</string>
+    <string name="now_playing">Reproduciendo: %1$s - %2$s</string>
+
+    <!-- Logros -->
+    <string name="achievements">Logros</string>
+    <string name="achievement_unlocked">¡Logro desbloqueado!</string>
+    <string name="progress">Progreso: %1$d/%2$d</string>
+
+    <!-- Categorías -->
+    <string name="category_chest">Pecho</string>
+    <string name="category_back">Espalda</string>
+    <string name="category_legs">Piernas</string>
+    <string name="category_arms">Brazos</string>
+    <string name="category_abs">Abdominales</string>
+</resources>

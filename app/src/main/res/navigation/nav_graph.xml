@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_routine">
+
+    <fragment
+        android:id="@+id/navigation_routine"
+        android:name="com.example.fithub360.fragments.RoutineFragment"
+        android:label="Rutina" />
+
+    <fragment
+        android:id="@+id/navigation_coach"
+        android:name="com.example.fithub360.fragments.CoachFragment"
+        android:label="Coach IA" />
+
+    <fragment
+        android:id="@+id/navigation_nutrition"
+        android:name="com.example.fithub360.fragments.NutritionFragment"
+        android:label="Nutrición" />
+
+    <fragment
+        android:id="@+id/navigation_music"
+        android:name="com.example.fithub360.fragments.MusicFragment"
+        android:label="Música" />
+
+    <fragment
+        android:id="@+id/navigation_achievements"
+        android:name="com.example.fithub360.fragments.AchievementsFragment"
+        android:label="Logros" />
+
+</navigation>
