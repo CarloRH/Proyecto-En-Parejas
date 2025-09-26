@@ -19,11 +19,76 @@
         android:id="@+id/coachDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Aquí recibirás consejos y motivación de tu coach virtual."
-        android:textSize="16sp"
+        android:text="Aquí recibirás consejos y motivación de tu coach virtual. Ingresa tu objetivo y recibirás una rutina personalizada."
+        android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/coachTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:id="@+id/coachScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/coachDescription"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editGoal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Describe tu objetivo (p. ej. perder peso, ganar masa muscular, mejorar resistencia)"
+                android:inputType="text"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Spinner
+                android:id="@+id/spinnerExperience"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/editGoal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp" />
+
+            <Button
+                android:id="@+id/btnAskCoach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Generar rutina"
+                app:layout_constraintTop_toBottomOf="@id/spinnerExperience"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="12dp" />
+
+            <ProgressBar
+                android:id="@+id/loadingProgressBarCoach"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="@id/btnAskCoach"
+                app:layout_constraintStart_toEndOf="@id/btnAskCoach"
+                android:layout_marginStart="12dp" />
+
+            <TextView
+                android:id="@+id/routineTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/btnAskCoach"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
