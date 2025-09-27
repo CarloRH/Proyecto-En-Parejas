@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.fithub360.R;
 import com.example.fithub360.models.Exercise;
 import java.util.List;
@@ -42,6 +43,18 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
         Exercise exercise = exerciseList.get(position);
         holder.nameTextView.setText(exercise.getName());
         holder.descriptionTextView.setText(exercise.getDescription());
+
+        String img = exercise.getImageUrl();
+        if (img != null && !img.trim().isEmpty()) {
+            Glide.with(holder.itemView.getContext())
+                    .load(img.trim())
+                    .placeholder(R.drawable.ic_exercise_placeholder)
+                    .error(R.drawable.ic_exercise_placeholder)
+                    .into(holder.imageView);
+        } else {
+            holder.imageView.setImageResource(R.drawable.ic_exercise_placeholder);
+        }
+
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) listener.onItemClick(exercise);
         });

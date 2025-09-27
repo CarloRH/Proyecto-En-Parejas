@@ -28,14 +28,92 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <Spinner
-        android:id="@+id/muscleGroupSpinner"
+    <LinearLayout
+        android:id="@+id/muscleButtonsContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:popupTheme="@style/ThemeOverlay.MaterialComponents"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@id/routineSubtitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Pecho -> BÍCEPS -->
+        <Button
+            android:id="@+id/btnChest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BÍCEPS"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:background="#2E2E2E"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Espalda -> TRÍCEPS -->
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TRÍCEPS"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:background="#2E2E2E"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Piernas -> ESPALDA -->
+        <Button
+            android:id="@+id/btnLegs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ESPALDA"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:background="#2E2E2E"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Hombros -> PECHO -->
+        <Button
+            android:id="@+id/btnShoulders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PECHO"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:background="#2E2E2E"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Bíceps -> ANTEBRAZOS -->
+        <Button
+            android:id="@+id/btnBiceps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ANTEBRAZOS"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:background="#2E2E2E"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Tríceps -> ABDOMEN -->
+        <Button
+            android:id="@+id/btnTriceps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ABDOMEN"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:background="#2E2E2E"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Antebrazos -> PIERNAS -->
+        <Button
+            android:id="@+id/btnForearms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PIERNAS"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:background="#2E2E2E"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

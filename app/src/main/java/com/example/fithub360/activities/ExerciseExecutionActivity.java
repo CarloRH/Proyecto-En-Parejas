@@ -35,6 +35,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
     private Button startTimerBtn;
     private Button countRepBtn;
     private ProgressBar imageProgress;
+    private TextView nameOverlay; // Nuevo: nombre superpuesto en la imagen
 
     private int exerciseId;
     private String exerciseName;
@@ -59,6 +60,7 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         startTimerBtn = findViewById(R.id.startTimerBtn);
         countRepBtn = findViewById(R.id.countRepBtn);
         imageProgress = findViewById(R.id.imageLoadingProgress);
+        nameOverlay = findViewById(R.id.exerciseNameOverlay);
 
         dbHelper = new DatabaseHelper(this);
 
@@ -67,7 +69,9 @@ public class ExerciseExecutionActivity extends AppCompatActivity {
         exerciseDescription = getIntent().getStringExtra("exercise_description");
         muscleGroupId = getIntent().getIntExtra("muscle_group_id", 0);
 
-        nameText.setText(exerciseName != null ? exerciseName : "Ejercicio");
+        String safeName = exerciseName != null ? exerciseName : "Ejercicio";
+        nameText.setText(safeName);
+        if (nameOverlay != null) nameOverlay.setText(safeName);
         descText.setText(exerciseDescription != null ? exerciseDescription : "");
 
         loadMainImage(exerciseId);

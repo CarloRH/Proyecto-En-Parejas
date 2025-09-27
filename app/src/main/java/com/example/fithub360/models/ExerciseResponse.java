@@ -16,6 +16,7 @@ public class ExerciseResponse {
         public int id;
         public String name;
         public String description;
+        public List<Integer> muscles; // ids de músculos principales
+        public List<Integer> muscles_secondary; // opcional, ids secundarios
     }
 }
-

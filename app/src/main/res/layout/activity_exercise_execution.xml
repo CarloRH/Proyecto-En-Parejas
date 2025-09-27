@@ -6,15 +6,44 @@
     android:background="#121212"
     android:padding="16dp">
 
+    <!-- Guideline al 58% para que la imagen ocupe un poco más de la mitad -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_image_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.58" />
+
     <ImageView
         android:id="@+id/exerciseImageView"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_exercise_placeholder"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline_image_bottom"/>
+
+    <!-- Nombre superpuesto en la imagen -->
+    <TextView
+        android:id="@+id/exerciseNameOverlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:background="#66000000"
+        app:layout_constraintTop_toTopOf="@id/exerciseImageView"
+        app:layout_constraintEnd_toEndOf="@id/exerciseImageView"
+        android:layout_margin="8dp"/>
 
     <ProgressBar
         android:id="@+id/imageLoadingProgress"
@@ -92,4 +121,3 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
