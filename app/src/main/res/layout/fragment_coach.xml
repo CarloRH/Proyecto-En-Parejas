@@ -9,7 +9,7 @@
         android:id="@+id/coachTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Coach Virtual"
+        android:text="@string/coach_title"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,7 +19,7 @@
         android:id="@+id/coachDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Aquí recibirás consejos y motivación de tu coach virtual. Ingresa tu objetivo y recibirás una rutina personalizada."
+        android:text="@string/coach_description"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/coachTitle"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
                 android:id="@+id/editGoal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="Describe tu objetivo (p. ej. perder peso, ganar masa muscular, mejorar resistencia)"
+                android:hint="@string/hint_goal"
                 android:inputType="text"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,9 +62,31 @@
                 android:id="@+id/btnAskCoach"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Generar rutina"
+                android:text="@string/generate_routine"
                 app:layout_constraintTop_toBottomOf="@id/spinnerExperience"
                 app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="12dp" />
+
+            <Button
+                android:id="@+id/btnSaveRoutine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save_routine"
+                app:layout_constraintTop_toBottomOf="@id/spinnerExperience"
+                app:layout_constraintStart_toEndOf="@id/btnAskCoach"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/primary"
+                android:textColor="@color/text_on_primary" />
+
+            <Button
+                android:id="@+id/btnSavedHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/history"
+                app:layout_constraintTop_toBottomOf="@id/spinnerExperience"
+                app:layout_constraintStart_toEndOf="@id/btnSaveRoutine"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp" />
 
             <ProgressBar

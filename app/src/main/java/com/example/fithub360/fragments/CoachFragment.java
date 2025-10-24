@@ -8,25 +8,37 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.fithub360.R;
+import com.example.fithub360.activities.SavedRoutinesActivity;
 import com.example.fithub360.models.ChatCompletionRequest;
 import com.example.fithub360.models.ChatCompletionResponse;
 import com.example.fithub360.models.Message;
 import com.example.fithub360.network.NvidiaApiService;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -45,14 +57,20 @@ public class CoachFragment extends Fragment {
     // API key exclusiva para el coach (proporcionada por el usuario)
     private static final String NVIDIA_API_KEY = "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";
 
+
     private EditText editGoal; // campo para que el usuario ingrese su objetivo
     private Spinner spinnerExperience;
     private View btnAsk;
+    private Button btnSaveRoutine;
+    private Button btnSavedHistory;
     private ProgressBar progressBar;
     private TextView routineTextView;
 
     private NvidiaApiService apiService;
     private Call<ChatCompletionResponse> currentCall;
+
+    private static final String PREFS_NAME = "fithub_saved_routines";
+    private static final String KEY_SAVED = "saved_routines";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,6 +90,8 @@ public class CoachFragment extends Fragment {
         editGoal = view.findViewById(R.id.editGoal);
         spinnerExperience = view.findViewById(R.id.spinnerExperience);
         btnAsk = view.findViewById(R.id.btnAskCoach);
+        btnSaveRoutine = view.findViewById(R.id.btnSaveRoutine);
+        btnSavedHistory = view.findViewById(R.id.btnSavedHistory);
         progressBar = view.findViewById(R.id.loadingProgressBarCoach);
         routineTextView = view.findViewById(R.id.routineTextView);
         routineTextView.setMovementMethod(new ScrollingMovementMethod());
@@ -125,7 +145,7 @@ public class CoachFragment extends Fragment {
                 if (experience != null && experience.startsWith("Selecciona")) experience = null;
 
                 List<Message> messages = new ArrayList<>();
-                messages.add(new Message("system", "Eres un coach de gimnasio profesional y empático. Pregunta clarificadora: solicita al usuario su objetivo específico, nivel de experiencia, disponibilidad semanal y si tiene lesiones o limitaciones. Luego, genera una rutina de entrenamiento clara y segura acorde al objetivo y nivel. Responde en español, con instrucciones paso a paso, ejercicios por sesión, repeticiones/series/tiempos y consejos de progresión. No des diagnóstico médico ni recomiendes medicamentos. Responde en texto plano, sin viñetas, sin markdown y mantén un tono motivador."));
+                messages.add(new Message("system", "Eres un coach de gimnasio profesional y empático. NO HAGAS PREGUNTAS: no solicites información adicional al usuario. Con la información ya proporcionada por el usuario, genera directamente una rutina de entrenamiento clara y segura acorde al objetivo y nivel. Responde en español, con instrucciones paso a paso, ejercicios por sesión, repeticiones/series/tiempos y consejos de progresión. No des diagnóstico médico ni recomiendes medicamentos. Responde en texto plano, sin viñetas, sin markdown y mantén un tono motivador."));
                 messages.add(new Message("user", "Mi objetivo: " + goal + (experience != null ? ". Nivel: " + experience : "")));
 
                 ChatCompletionRequest request = new ChatCompletionRequest(
@@ -173,6 +193,58 @@ public class CoachFragment extends Fragment {
                 Toast.makeText(requireContext(), "No se pudo generar la rutina. Verifica tu conexión.", Toast.LENGTH_SHORT).show();
             }
         });
+
+        // Guardar la rutina actual en SharedPreferences
+        btnSaveRoutine.setOnClickListener(v -> saveCurrentRoutine());
+
+        // Abrir historial de rutinas guardadas
+        btnSavedHistory.setOnClickListener(v -> {
+            try {
+                Intent i = new Intent(requireContext(), SavedRoutinesActivity.class);
+                startActivity(i);
+            } catch (Exception ex) {
+                Log.e(TAG, "Error al abrir historial", ex);
+                Toast.makeText(requireContext(), "No se pudo abrir el historial.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void saveCurrentRoutine() {
+        String content = routineTextView.getText() == null ? "" : routineTextView.getText().toString().trim();
+        if (TextUtils.isEmpty(content)) {
+            Toast.makeText(requireContext(), "No hay rutina para guardar. Genera una primero.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        SharedPreferences prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String raw = prefs.getString(KEY_SAVED, null);
+        JSONArray arr = new JSONArray();
+        try {
+            if (raw != null) {
+                arr = new JSONArray(raw);
+            }
+        } catch (JSONException e) {
+            Log.w(TAG, "JSON parse error, creando array nuevo", e);
+            arr = new JSONArray();
+        }
+
+        try {
+            JSONObject item = new JSONObject();
+            long ts = System.currentTimeMillis();
+            item.put("id", ts);
+            item.put("timestamp", ts);
+            item.put("content", content);
+            // título corto: primera línea o primeros 60 caracteres
+            String title = content.split("\n")[0];
+            if (title.length() > 60) title = title.substring(0, 57) + "...";
+            item.put("title", title);
+            arr.put(item);
+            prefs.edit().putString(KEY_SAVED, arr.toString()).apply();
+            Toast.makeText(requireContext(), "Rutina guardada.", Toast.LENGTH_SHORT).show();
+        } catch (JSONException e) {
+            Log.e(TAG, "Error guardando rutina", e);
+            Toast.makeText(requireContext(), "No se pudo guardar la rutina.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

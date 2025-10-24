@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#FF6200EE</color>
-    <color name="primary_dark">#FF3700B3</color>
-    <color name="primary_variant">#FF3700B3</color>
-    <color name="secondary">#FF03DAC5</color>
-    <color name="secondary_variant">#FF018786</color>
+    <!-- Paleta principal: botones/elementos destacados en amarillo-naranja -->
+    <color name="primary">#FFFFA000</color> <!-- naranja/ámbar vibrante -->
+    <color name="primary_dark">#FFFF8F00</color> <!-- tono más oscuro para status bar -->
+    <color name="primary_variant">#FFFF8F00</color>
+    <color name="secondary">#FFFFC107</color> <!-- amarillo claro complementario -->
+    <color name="secondary_variant">#FFFFB300</color>
 
-    <!-- Colores específicos para modo oscuro -->
-    <color name="background_dark">#121212</color>
-    <color name="surface_dark">#1E1E1E</color>
+    <!-- Fondos en negro total -->
+    <color name="background_dark">#000000</color>
+    <color name="surface_dark">#000000</color>
     <color name="error">#FFB00020</color>
 
-    <!-- Colores de texto -->
-    <color name="text_primary_dark">#DEFFFFFF</color>
-    <color name="text_secondary_dark">#99FFFFFF</color>
-    <color name="text_hint_dark">#61FFFFFF</color>
+    <!-- Colores de texto: blancos/altos contrastes para legibilidad sobre fondo negro -->
+    <color name="text_primary_dark">#FFFFFFFF</color>
+    <color name="text_secondary_dark">#B3FFFFFF</color>
+    <color name="text_hint_dark">#80FFFFFF</color>
+    <!-- Texto sobre botones primary (oscuro para buen contraste con amarillo/naranja) -->
+    <color name="text_on_primary">#000000</color>
 
     <!-- Colores de estado -->
     <color name="success">#4CAF50</color>
     <color name="warning">#FFC107</color>
     <color name="info">#2196F3</color>
 </resources>
-
