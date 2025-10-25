@@ -40,6 +40,9 @@
         <activity
             android:name=".activities.ExerciseExecutionActivity"
             android:exported="false" />
+        <activity
+            android:name=".activities.SavedRoutinesActivity"
+            android:exported="false" />
 
         <service
             android:name=".services.MusicService"

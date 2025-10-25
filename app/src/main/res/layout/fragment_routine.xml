@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212"
+    android:background="@color/background_dark"
     android:padding="16dp">
 
     <TextView
@@ -13,7 +13,7 @@
         android:text="Rutinas"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary_dark"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -22,7 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Selecciona un grupo muscular para ver ejercicios"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary_dark"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/routineTitle"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,8 +45,8 @@
             android:layout_height="wrap_content"
             android:text="BÍCEPS"
             android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:background="#2E2E2E"
+            android:textColor="@color/text_on_primary"
+            android:backgroundTint="@color/primary"
             android:layout_marginBottom="8dp"/>
 
         <!-- Espalda -> TRÍCEPS -->
@@ -56,8 +56,8 @@
             android:layout_height="wrap_content"
             android:text="TRÍCEPS"
             android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:background="#2E2E2E"
+            android:textColor="@color/text_on_primary"
+            android:backgroundTint="@color/primary"
             android:layout_marginBottom="8dp"/>
 
         <!-- Piernas -> ESPALDA -->
@@ -67,8 +67,8 @@
             android:layout_height="wrap_content"
             android:text="ESPALDA"
             android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:background="#2E2E2E"
+            android:textColor="@color/text_on_primary"
+            android:backgroundTint="@color/primary"
             android:layout_marginBottom="8dp"/>
 
         <!-- Hombros -> PECHO -->
@@ -78,8 +78,8 @@
             android:layout_height="wrap_content"
             android:text="PECHO"
             android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:background="#2E2E2E"
+            android:textColor="@color/text_on_primary"
+            android:backgroundTint="@color/primary"
             android:layout_marginBottom="8dp"/>
 
         <!-- Bíceps -> ANTEBRAZOS -->
@@ -89,8 +89,8 @@
             android:layout_height="wrap_content"
             android:text="ANTEBRAZOS"
             android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:background="#2E2E2E"
+            android:textColor="@color/text_on_primary"
+            android:backgroundTint="@color/primary"
             android:layout_marginBottom="8dp"/>
 
         <!-- Tríceps -> ABDOMEN -->
@@ -100,8 +100,8 @@
             android:layout_height="wrap_content"
             android:text="ABDOMEN"
             android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:background="#2E2E2E"
+            android:textColor="@color/text_on_primary"
+            android:backgroundTint="@color/primary"
             android:layout_marginBottom="8dp"/>
 
         <!-- Antebrazos -> PIERNAS -->
@@ -111,8 +111,8 @@
             android:layout_height="wrap_content"
             android:text="PIERNAS"
             android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:background="#2E2E2E"/>
+            android:textColor="@color/text_on_primary"
+            android:backgroundTint="@color/primary"/>
 
     </LinearLayout>
 

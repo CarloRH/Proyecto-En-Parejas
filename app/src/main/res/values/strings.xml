@@ -44,4 +44,54 @@
     <string name="category_legs">Piernas</string>
     <string name="category_arms">Brazos</string>
     <string name="category_abs">Abdominales</string>
+
+    <!-- Strings añadidas para accesibilidad y recursos -->
+    <string name="favorite">Favorito</string>
+    <string name="play_pause">Reproducir/Pausar</string>
+    <string name="exercise_image">Imagen del ejercicio</string>
+
+    <!-- Nuevas strings para layouts editados -->
+    <string name="track_name_default">Nombre de la canción</string>
+    <string name="track_artist_default">Artista</string>
+
+    <string name="exercise_name_default">Nombre del ejercicio</string>
+    <string name="exercise_desc_default">Descripción breve del ejercicio</string>
+
+    <string name="rutinas_title">Rutinas</string>
+    <string name="routine_subtitle">Selecciona un grupo muscular para ver ejercicios</string>
+    <string name="btn_biceps">BÍCEPS</string>
+    <string name="btn_triceps">TRÍCEPS</string>
+    <string name="btn_back">ESPALDA</string>
+    <string name="btn_chest">PECHO</string>
+    <string name="btn_forearms">ANTEBRAZOS</string>
+    <string name="btn_abs">ABDOMEN</string>
+    <string name="btn_legs">PIERNAS</string>
+
+    <string name="weight_hint">Peso (kg)</string>
+    <string name="height_hint">Altura (cm)</string>
+    <string name="age_hint">Edad (años, opcional)</string>
+    <string name="age_hint_short">Edad (opcional)</string>
+    <string name="get_recommendations">Obtener recomendaciones</string>
+
+    <string name="name_default">Nombre</string>
+    <string name="time_default">Tiempo: 30s</string>
+    <string name="reps_default">Reps: 0/10</string>
+    <string name="start_timer">Iniciar temporizador</string>
+    <string name="count_rep">Contar repetición</string>
+
+    <string name="exercises_title">Ejercicios</string>
+    <string name="no_exercises">No se encontraron ejercicios</string>
+
+    <!-- Coach -->
+    <string name="coach_title">Coach Virtual</string>
+    <string name="coach_description">Aquí recibirás consejos y motivación de tu coach virtual. Ingresa tu objetivo y recibirás una rutina personalizada.</string>
+    <string name="hint_goal">Describe tu objetivo (p. ej. perder peso, ganar masa muscular, mejorar resistencia)</string>
+    <string name="generate_routine">Generar rutina</string>
+    <string name="save_routine">Guardar rutina</string>
+    <string name="history">Historial</string>
+
+    <!-- Saved routines UI -->
+    <string name="no_saved_routines">No hay rutinas guardadas</string>
+    <string name="saved_item_title">Título</string>
+    <string name="saved_item_date">Fecha</string>
 </resources>

@@ -6,14 +6,14 @@
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp"
-    android:background="#121212">
+    android:background="@color/surface_dark">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:background="#121212">
+        android:background="@color/surface_dark">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre de la canción"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary_dark"
                 android:textStyle="bold"
                 android:textSize="16sp" />
 
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Artista"
-                android:textColor="#CCCCCC"
+                android:textColor="@color/text_secondary_dark"
                 android:textSize="14sp"
                 android:layout_marginTop="4dp" />
         </LinearLayout>
@@ -46,8 +46,8 @@
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@android:drawable/btn_star"
-            android:tint="#FFD700"
-            android:contentDescription="Favorito" />
+            app:tint="@color/primary"
+            android:contentDescription="@string/favorite" />
 
         <ImageButton
             android:id="@+id/playPauseButton"
@@ -55,7 +55,7 @@
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@android:drawable/ic_media_play"
-            android:tint="#FFFFFF"
-            android:contentDescription="Reproducir/Pausar" />
+            app:tint="@color/text_primary_dark"
+            android:contentDescription="@string/play_pause" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

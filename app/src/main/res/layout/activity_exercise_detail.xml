@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212"
+    android:background="@color/background_dark"
     android:padding="12dp">
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Ejercicios"
         android:textStyle="bold"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary_dark"
         android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -33,7 +33,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="No se encontraron ejercicios"
-        android:textColor="#DDFFFFFF"
+        android:textColor="@color/text_secondary_dark"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/titleText"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,4 +51,3 @@
         android:layout_marginTop="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
