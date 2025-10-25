@@ -23,6 +23,8 @@ import com.example.fithub360.models.ChatCompletionRequest;
 import com.example.fithub360.models.ChatCompletionResponse;
 import com.example.fithub360.models.Message;
 import com.example.fithub360.network.NvidiaApiService;
+import com.example.fithub360.utils.N8nEmailSender;
+import com.example.fithub360.utils.SessionManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +51,10 @@ public class CoachFragment extends Fragment {
     private Spinner spinnerExperience;
     private View btnAsk;
     private ProgressBar progressBar;
+    // Envío por correo
+    private View btnSendEmailCoach;
+    private ProgressBar sendingProgressCoach;
+
     private TextView routineTextView;
 
     private NvidiaApiService apiService;
@@ -75,6 +81,16 @@ public class CoachFragment extends Fragment {
         progressBar = view.findViewById(R.id.loadingProgressBarCoach);
         routineTextView = view.findViewById(R.id.routineTextView);
         routineTextView.setMovementMethod(new ScrollingMovementMethod());
+
+        btnSendEmailCoach = view.findViewById(R.id.btnSendEmailCoach);
+        sendingProgressCoach = view.findViewById(R.id.sendingProgressCoach);
+        btnSendEmailCoach.setEnabled(false);
+        try {
+            SessionManager sm = new SessionManager(requireContext());
+            if (TextUtils.isEmpty(sm.getCurrentEmail())) {
+                btnSendEmailCoach.setEnabled(false);
+            }
+        } catch (Exception ignored) {}
     }
 
     private void setupSpinner() {
@@ -110,17 +126,15 @@ public class CoachFragment extends Fragment {
     }
 
     private void setupActions() {
+        // Generar rutina con IA
         btnAsk.setOnClickListener(v -> {
-            if (currentCall != null && !currentCall.isCanceled()) {
-                return;
-            }
+            if (currentCall != null && !currentCall.isCanceled()) return;
             try {
                 String goal = safeText(editGoal);
                 if (TextUtils.isEmpty(goal)) {
                     Toast.makeText(requireContext(), "Por favor, ingresa tu objetivo (p. ej. perder peso, ganar masa muscular, mejorar resistencia).", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 String experience = spinnerExperience.getSelectedItem() != null ? spinnerExperience.getSelectedItem().toString() : null;
                 if (experience != null && experience.startsWith("Selecciona")) experience = null;
 
@@ -138,6 +152,7 @@ public class CoachFragment extends Fragment {
 
                 setLoading(true);
                 routineTextView.setVisibility(View.GONE);
+                btnSendEmailCoach.setEnabled(false);
 
                 currentCall = apiService.createCompletion(request);
                 currentCall.enqueue(new Callback<ChatCompletionResponse>() {
@@ -153,6 +168,7 @@ public class CoachFragment extends Fragment {
                             if (!TextUtils.isEmpty(content)) {
                                 routineTextView.setText(content);
                                 routineTextView.setVisibility(View.VISIBLE);
+                                btnSendEmailCoach.setEnabled(true);
                                 return;
                             }
                         }
@@ -167,10 +183,40 @@ public class CoachFragment extends Fragment {
                         Toast.makeText(requireContext(), "No se pudo generar la rutina. Verifica tu conexión.", Toast.LENGTH_SHORT).show();
                     }
                 });
-
             } catch (Exception e) {
                 Log.e(TAG, "Error al preparar la solicitud", e);
                 Toast.makeText(requireContext(), "No se pudo generar la rutina. Verifica tu conexión.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Enviar conversación por correo
+        btnSendEmailCoach.setOnClickListener(v -> {
+            try {
+                SessionManager sm = new SessionManager(requireContext());
+                String email = sm.getCurrentEmail();
+                String content = routineTextView.getText() != null ? routineTextView.getText().toString().trim() : "";
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(requireContext(), "Inicia sesión para enviar por correo.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(content)) {
+                    Toast.makeText(requireContext(), "No hay conversación para enviar.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                btnSendEmailCoach.setEnabled(false);
+                sendingProgressCoach.setVisibility(View.VISIBLE);
+
+                N8nEmailSender.sendEmail(email, "FitHub360 - Coach IA", content, (success, message) -> {
+                    if (!isAdded()) return;
+                    sendingProgressCoach.setVisibility(View.GONE);
+                    btnSendEmailCoach.setEnabled(true);
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+                });
+            } catch (Exception e) {
+                if (!isAdded()) return;
+                sendingProgressCoach.setVisibility(View.GONE);
+                btnSendEmailCoach.setEnabled(true);
+                Toast.makeText(requireContext(), "Error al enviar. Inténtalo más tarde.", Toast.LENGTH_SHORT).show();
             }
         });
     }

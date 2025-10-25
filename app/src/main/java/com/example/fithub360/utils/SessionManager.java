@@ -7,6 +7,7 @@ public class SessionManager {
     private static final String PREF_NAME = "FitHub360Prefs";
     private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
     private static final String KEY_USERNAME = "username";
+    private static final String KEY_EMAIL = "email";
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
@@ -24,12 +25,24 @@ public class SessionManager {
         editor.commit();
     }
 
+    // Nueva sobrecarga con email
+    public void setLogin(boolean isLoggedIn, String username, String email) {
+        editor.putBoolean(KEY_IS_LOGGED_IN, isLoggedIn);
+        editor.putString(KEY_USERNAME, username);
+        editor.putString(KEY_EMAIL, email);
+        editor.commit();
+    }
+
     public boolean isLoggedIn() {
         return prefs.getBoolean(KEY_IS_LOGGED_IN, false);
     }
 
     public String getCurrentUsername() {
         return prefs.getString(KEY_USERNAME, "");
+    }
+
+    public String getCurrentEmail() {
+        return prefs.getString(KEY_EMAIL, "");
     }
 
     public void logout() {

@@ -11,7 +11,12 @@
     <color name="surface_dark">#1E1E1E</color>
     <color name="error">#FFB00020</color>
 
-    <!-- Colores de texto -->
+    <!-- Colores de texto (modo claro) -->
+    <color name="text_primary">#FF000000</color>
+    <color name="text_secondary">#66000000</color>
+    <color name="text_hint">#42000000</color>
+
+    <!-- Colores de texto (modo oscuro) -->
     <color name="text_primary_dark">#DEFFFFFF</color>
     <color name="text_secondary_dark">#99FFFFFF</color>
     <color name="text_hint_dark">#61FFFFFF</color>
@@ -21,4 +26,3 @@
     <color name="warning">#FFC107</color>
     <color name="info">#2196F3</color>
 </resources>
-

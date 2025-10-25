@@ -23,6 +23,8 @@ import com.example.fithub360.models.ChatCompletionRequest;
 import com.example.fithub360.models.ChatCompletionResponse;
 import com.example.fithub360.models.Message;
 import com.example.fithub360.network.NvidiaApiService;
+ import com.example.fithub360.utils.N8nEmailSender;
+import com.example.fithub360.utils.SessionManager;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -56,6 +58,10 @@ public class NutritionFragment extends Fragment {
     private TextView imcTextView;
     private TextView recommendationTextView;
 
+    // Nuevos: envío por correo
+    private View btnSendEmailNutrition;
+    private ProgressBar sendingProgressNutrition;
+
     private NvidiaApiService apiService;
     private Call<ChatCompletionResponse> currentCall;
 
@@ -83,6 +89,10 @@ public class NutritionFragment extends Fragment {
         imcTextView = view.findViewById(R.id.imcTextView);
         recommendationTextView = view.findViewById(R.id.recommendationTextView);
         recommendationTextView.setMovementMethod(new ScrollingMovementMethod());
+
+        btnSendEmailNutrition = view.findViewById(R.id.btnSendEmailNutrition);
+        sendingProgressNutrition = view.findViewById(R.id.sendingProgressNutrition);
+        btnSendEmailNutrition.setEnabled(false); // deshabilitado hasta tener recomendación
     }
 
     private void setupSpinner() {
@@ -184,6 +194,7 @@ public class NutritionFragment extends Fragment {
 
                 setLoading(true);
                 recommendationTextView.setVisibility(View.GONE);
+                btnSendEmailNutrition.setEnabled(false);
 
                 currentCall = apiService.createCompletion(request);
                 currentCall.enqueue(new Callback<ChatCompletionResponse>() {
@@ -199,6 +210,7 @@ public class NutritionFragment extends Fragment {
                             if (!TextUtils.isEmpty(content)) {
                                 recommendationTextView.setText(content);
                                 recommendationTextView.setVisibility(View.VISIBLE);
+                                btnSendEmailNutrition.setEnabled(true);
                                 return;
                             }
                         }
@@ -217,6 +229,36 @@ public class NutritionFragment extends Fragment {
             } catch (Exception e) {
                 Log.e(TAG, "Error al preparar la solicitud", e);
                 Toast.makeText(requireContext(), "No se pudieron obtener recomendaciones. Verifica tu conexión.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnSendEmailNutrition.setOnClickListener(v -> {
+            try {
+                SessionManager sm = new SessionManager(requireContext());
+                String email = sm.getCurrentEmail();
+                String content = recommendationTextView.getText() != null ? recommendationTextView.getText().toString().trim() : "";
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(requireContext(), "Inicia sesión para enviar por correo.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(content)) {
+                    Toast.makeText(requireContext(), "No hay recomendaciones para enviar.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                btnSendEmailNutrition.setEnabled(false);
+                sendingProgressNutrition.setVisibility(View.VISIBLE);
+
+                N8nEmailSender.sendEmail(email, "FitHub360 - Nutrición", content, (success, message) -> {
+                    if (!isAdded()) return;
+                    sendingProgressNutrition.setVisibility(View.GONE);
+                    btnSendEmailNutrition.setEnabled(true);
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+                });
+            } catch (Exception e) {
+                if (!isAdded()) return;
+                sendingProgressNutrition.setVisibility(View.GONE);
+                btnSendEmailNutrition.setEnabled(true);
+                Toast.makeText(requireContext(), "Error al enviar. Inténtalo más tarde.", Toast.LENGTH_SHORT).show();
             }
         });
     }

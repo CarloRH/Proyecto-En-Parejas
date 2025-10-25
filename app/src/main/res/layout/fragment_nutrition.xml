@@ -126,7 +126,7 @@
     <TextView
         android:id="@+id/recommendationTextView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:textColor="#FFFFFF"
         android:visibility="gone"
         android:scrollbars="vertical"
@@ -134,9 +134,31 @@
         android:maxLines="20"
         android:isScrollContainer="true"
         app:layout_constraintTop_toBottomOf="@id/loadingProgressBar"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/margin_medium" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSendEmailNutrition"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Enviar recomendaciones por correo"
+        android:textAllCaps="false"
+        android:enabled="false"
+        app:layout_constraintTop_toBottomOf="@id/recommendationTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp" />
+
+    <ProgressBar
+        android:id="@+id/sendingProgressNutrition"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/btnSendEmailNutrition"
+        app:layout_constraintBottom_toBottomOf="@id/btnSendEmailNutrition"
+        app:layout_constraintStart_toEndOf="@id/btnSendEmailNutrition"
+        android:layout_marginStart="12dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

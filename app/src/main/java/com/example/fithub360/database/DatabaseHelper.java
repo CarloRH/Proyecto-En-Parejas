@@ -8,12 +8,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "FitHub360.db";
-    private static final int DATABASE_VERSION = 2; // nuevo esquema con muscle_group_id
+    private static final int DATABASE_VERSION = 4; // nueva versión con columna email en users
 
     // Tabla usuarios
     public static final String TABLE_USERS = "users";
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_USERNAME = "username";
+    public static final String COLUMN_EMAIL = "email";
     public static final String COLUMN_PASSWORD = "password";
 
     // Tabla ejercicios completados
@@ -26,8 +27,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Crear tabla usuarios
     private static final String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "(" +
             COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            COLUMN_USERNAME + " TEXT UNIQUE NOT NULL, " +
-            COLUMN_PASSWORD + " TEXT NOT NULL);";
+            COLUMN_USERNAME + " TEXT NOT NULL, " +
+            COLUMN_EMAIL + " TEXT NOT NULL, " +
+            COLUMN_PASSWORD + " TEXT NOT NULL, " +
+            "UNIQUE(" + COLUMN_USERNAME + "), " +
+            "UNIQUE(" + COLUMN_EMAIL + ")" +
+            ");";
 
     // Crear tabla ejercicios completados
     private static final String CREATE_COMPLETED_EXERCISES_TABLE = "CREATE TABLE " + TABLE_COMPLETED_EXERCISES + "(" +
@@ -49,22 +54,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Estrategia simple: recrear tablas (para entornos de desarrollo)
+        // Estrategia de desarrollo: recrear tablas
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_COMPLETED_EXERCISES);
         onCreate(db);
     }
 
     // Usuarios
-    public boolean registerUser(String username, String password) {
+    public boolean registerUser(String username, String email, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, username);
+        values.put(COLUMN_EMAIL, email);
         values.put(COLUMN_PASSWORD, password);
         long result = db.insert(TABLE_USERS, null, values);
         return result != -1;
     }
 
+    // Compatibilidad: método antiguo (sin email). Mantener para evitar fallos si hay llamadas previas.
+    public boolean registerUser(String username, String password) {
+        // Registra con email vacío si se usa el método antiguo (no recomendado).
+        return registerUser(username, "", password);
+    }
+
+    public boolean checkUser(String username, String email, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {COLUMN_ID};
+        String selection = COLUMN_USERNAME + "=? AND " + COLUMN_EMAIL + "=? AND " + COLUMN_PASSWORD + "=?";
+        String[] selectionArgs = {username, email, password};
+        Cursor cursor = db.query(TABLE_USERS, columns, selection, selectionArgs, null, null, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count > 0;
+    }
+
+    // Compatibilidad: método antiguo (sin email)
     public boolean checkUser(String username, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = {COLUMN_ID};
