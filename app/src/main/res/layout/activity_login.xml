@@ -59,7 +59,7 @@
         android:layout_marginTop="@dimen/margin_medium"
         android:hint="Contraseña"
         app:layout_constraintTop_toBottomOf="@+id/emailLayout"
-        app:passwordToggleEnabled="true">
+        app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordEditText"

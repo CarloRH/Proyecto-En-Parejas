@@ -3,7 +3,6 @@
     <style name="Theme.FitHub360" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Colores primarios -->
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorPrimaryVariant">@color/primary_variant</item>
         <item name="colorOnPrimary">@android:color/white</item>
 

@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:hint="Peso (kg)"
         app:boxStrokeColor="#FFFFFF"
-        app:hintTextColor="#FFFFFF"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -36,7 +35,6 @@
         android:layout_height="wrap_content"
         android:hint="Altura (cm)"
         app:boxStrokeColor="#FFFFFF"
-        app:hintTextColor="#FFFFFF"
         app:layout_constraintTop_toBottomOf="@id/weightInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +57,6 @@
         android:layout_height="wrap_content"
         android:hint="Edad (años, opcional)"
         app:boxStrokeColor="#FFFFFF"
-        app:hintTextColor="#FFFFFF"
         app:layout_constraintTop_toBottomOf="@id/heightInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

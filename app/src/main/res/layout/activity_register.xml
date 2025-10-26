@@ -58,7 +58,7 @@
         android:hint="Contraseña"
         app:helperText="Mínimo 6 caracteres"
         app:layout_constraintTop_toBottomOf="@+id/emailLayout"
-        app:passwordToggleEnabled="true">
+        app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordEditText"

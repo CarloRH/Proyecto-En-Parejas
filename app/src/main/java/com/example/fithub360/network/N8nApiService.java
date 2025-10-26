@@ -25,7 +25,7 @@ public interface N8nApiService {
     @POST("webhook-test/fitHub360-send-email")
     Call<ResponseBody> sendEmailTest(@Query("secret") String secret, @Body EmailPayload body);
 
-    // Prod URL: https://.../webhook/fitHub360-send-email?secret=...
+    // Prod URL: https://.../webhook/fitHub360-send-emai
     @Headers("Content-Type: application/json")
     @POST("webhook/fitHub360-send-email")
     Call<ResponseBody> sendEmailProd(@Query("secret") String secret, @Body EmailPayload body);

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Overrides para modo noche -->
+    <color name="text_primary">#FFFFFFFF</color>
+    <color name="text_secondary">#99FFFFFF</color>
+    <color name="text_hint">#61FFFFFF</color>
+
+    <!-- Asegura compatibilidad para referencias existentes -->
+    <color name="primary_dark">@color/primary_variant</color>
+</resources>
+
